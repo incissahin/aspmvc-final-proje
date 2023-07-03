@@ -1,0 +1,63 @@
+﻿@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Mvc.Routing;
+
+@inject IUrlHelperFactory UrlHelperFactory
+
+@{
+    var urlHelper = UrlHelperFactory.GetUrlHelper(ViewContext);
+    var currentUrl = urlHelper.ActionContext.HttpContext.Request.Path;
+}
+
+@{
+    var isAuthenticated = Context.User.Identity.IsAuthenticated;
+    var buttonText = isAuthenticated ? "Çıkış Yap" : "Giriş Yap";
+    var action = isAuthenticated ? "Logout" : "Login";
+    var isAdmin = User.IsInRole("Admin");
+
+}
+<nav class="navbar navbar-expand-lg navigation" id="navbar">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/template/images/logo.png" alt="" class="img-fluid">
+        </a>
+
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain"
+                aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icofont-navigation-menu"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarmain">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a class="nav-link" href="/">Anasayfa</a></li>
+                <li class="nav-item"><a class="nav-link" asp-action="AboutUs" asp-controller="Page">Hakkımızda</a></li>
+                <li class="nav-item"><a class="nav-link" asp-action="OurServices" asp-controller="Page">Hizmetlerimiz</a></li>
+
+                <li class="nav-item dropdown">
+                    @await Component.InvokeAsync("DepartmentList")
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="blog-sidebar.html" id="dropdown05" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">Blog <i class="icofont-thin-down"></i></a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown05">
+                        <li><a class="dropdown-item" asp-action="Index" asp-controller="Post">Tüm Paylaşımlar</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" asp-action="Contact" asp-controller="Page">İletişim</a></li>
+                @if (!isAuthenticated)
+                {
+                    <li class="nav-item"><a class="btn btn-sm btn-success fs-1 p-2 mx-2 py-3" asp-action="@action" asp-controller="Auth" asp-route-redirectUrl="@currentUrl">Giriş Yap</a></li>
+                }else
+                {
+                    <li class="nav-item"><a class="btn btn-sm btn-danger fs-1 p-2 mx-2 py-3" asp-action="@action" asp-controller="Auth">Çıkış Yap</a></li>
+                }
+
+                @if (isAdmin)
+                {
+                    <li class="nav-item"><a class="btn btn-sm btn-primary fs-1 p-2 mx-2 py-3" asp-area="Admin" asp-action="Index" asp-controller="Dashboard">Admin Paneli</a></li>
+                }
+
+            </ul>
+        </div>
+    </div>
+</nav>

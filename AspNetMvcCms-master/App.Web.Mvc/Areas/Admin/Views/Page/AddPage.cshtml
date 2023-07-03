@@ -1,0 +1,30 @@
+﻿@model App.Entities.Concrete.Page
+@{
+    ViewData["Title"] = "AddPage";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Default form</h4>
+            <p class="card-description">Yeni Safa Ekleme Paneli</p>
+            <form class="forms-sample" asp-action="AddPage" method="post">
+                <div class="form-group">
+                    <label for="exampleInputUsername1">Başlık</label>
+                    <input type="text" class="form-control" asp-for="Title" placeholder="Başlık" />
+                </div>
+                <div class="form-group">
+                    <label for="Acıklama">Açıklama</label>
+                    <input type="text" class="form-control" asp-for="Content" placeholder="Açıklama" />
+                </div>
+                <div class="form-check form-check-flat form-check-primary">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" asp-for="IsActive" /> Durumu
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+                <input type="hidden" asp-for="Id" />
+            </form>
+        </div>
+    </div>
+</div>

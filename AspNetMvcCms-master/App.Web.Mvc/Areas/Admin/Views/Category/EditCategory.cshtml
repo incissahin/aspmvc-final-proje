@@ -1,0 +1,27 @@
+﻿@model App.Entities.Concrete.Category
+@{
+    ViewData["Title"] = "EditCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Default form</h4>
+            <p class="card-description">Kategori Düzenleme Paneli</p>
+            <form class="forms-sample" asp-action="EditCategory" method="post">
+                <div class="form-group">
+                    <label for="exampleInputUsername1">Kategori Adı</label>
+                    <input type="text" class="form-control" asp-for="Name" placeholder="Kategori Adı" />
+                </div>
+                <div class="form-group">
+                    <label for="Acıklama">Açıklama</label>
+                    <input type="text" class="form-control" asp-for="Description" placeholder="Açıklama" />
+                </div>
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+                <input type="hidden" asp-for="Id" />
+            </form>
+        </div>
+    </div>
+</div>
+

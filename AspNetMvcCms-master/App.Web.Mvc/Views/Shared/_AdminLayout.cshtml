@@ -1,0 +1,27 @@
+﻿@{
+	Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+ @await Html.PartialAsync("/Areas/Admin/Views/Default/_HeadPartial.cshtml")
+
+<body>
+	<div class="container-scroller">
+		@await Html.PartialAsync("/Areas/Admin/Views/Default/_SidebarPartial.cshtml")
+		<div class="container-fluid page-body-wrapper">
+
+			@await Html.PartialAsync("/Areas/Admin/Views/Default/_SettingPartial.cshtml")
+
+			@await Html.PartialAsync("/Areas/Admin/Views/Default/_NavbarPartial.cshtml")
+
+			@RenderBody()
+		</div>
+	</div>
+
+	@await Html.PartialAsync("/Areas/Admin/Views/Default/_ScriptPartial.cshtml")
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+﻿@using App.Entities.Concrete;
+@using App.Web.Mvc.ViewModels;
+@model PostCommentVM;
+
+<div class="col-lg-12">
+    <form class="comment-form my-5" method="post" asp-action="CreateComment">
+        <h4 class="mb-4">Bir Yorum Yaz</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <h6>@User.Identity.Name</h6>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input class="form-control" type="hidden" name ="postId" value=@Model.PostId>
+                    <input class="form-control" type="hidden" name="userId" value=@Model.UserId>
+                </div>
+            </div>
+        </div>
+
+
+        <textarea class="form-control mb-4" asp-for="Comment" cols="30" rows="5"
+                  placeholder="Comment"></textarea>
+
+        <button class="btn btn-main-2 btn-round-full" type="submit">Yorumu Kaydet</button>
+    </form>
+</div>

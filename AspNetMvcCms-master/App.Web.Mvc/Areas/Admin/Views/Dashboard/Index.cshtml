@@ -1,0 +1,46 @@
+﻿
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="main-panel">
+	<div class="content-wrapper pb-0">
+		<div class="page-header flex-wrap">
+
+			<div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
+				<div class="d-flex align-items-center">
+					<a href="#">
+						<p class="m-0 pe-3">Anasafa</p>
+					</a>
+					<a class="ps-3 me-4" href="#">
+						<p class="m-0">Admin</p>
+					</a>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- image card row starts here -->
+		@await Component.InvokeAsync("ImageList")
+
+		<!-- table row starts here -->
+
+		<div class="row">
+
+			@await Component.InvokeAsync("MixList")
+			@await Component.InvokeAsync("UserList")
+			
+		</div>
+	</div>
+	<!-- content-wrapper ends -->
+	<!-- partial:partials/_footer.html -->
+	<footer class="footer">
+		<div class="d-sm-flex justify-content-center justify-content-sm-between">
+			<span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © @DateTime.Now.Year <a href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>. All rights reserved.</span>
+			<span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
+		</div>
+	</footer>
+	<!-- partial -->
+</div>
+

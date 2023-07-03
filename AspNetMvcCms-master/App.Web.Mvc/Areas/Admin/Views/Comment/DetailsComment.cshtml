@@ -1,0 +1,37 @@
+﻿@model App.Entities.Concrete.PostComment
+@{
+    ViewData["Title"] = "DetailsComment";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12 grid-margin stretch-card">
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">Default form</h4>
+			<p class="card-description">Yorum Detay Paneli</p>
+			<form class="forms-sample" asp-action="DetailsComment" method="post">
+				<div class="form-group">
+					<label for="exampleInputUsername1">Yorum</label>
+					<input type="text" class="form-control" asp-for="Comment" placeholder="Yorum" readonly />
+				</div>
+				<div class="form-group">
+					<label for="Acıklama">Kullanıcı No</label>
+					<input type="text" class="form-control" asp-for="UserId" placeholder="Kullanıcı Adı" readonly />
+				</div>
+				<div class="form-group">
+					<label for="Acıklama">Yorum Yapılan Post No</label>
+					<input type="text" class="form-control" asp-for="PostId" placeholder="Post" readonly />
+				</div>
+				<div class="form-group">
+					<label for="Acıklama">Yazılma Tarihi</label>
+					<input type="text" class="form-control" asp-for="CreatedAt" placeholder="Yazılma Tarihi" readonly />
+				</div>
+				<div class="form-group">
+					<label for="Acıklama">Durum</label>
+					<input type="checkbox" class="fa-check-circle" asp-for="IsActive" placeholder="Durum" readonly />
+				</div>
+				<input type="hidden" asp-for="Id" />
+			</form>
+		</div>
+	</div>
+</div>

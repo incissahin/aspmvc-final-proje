@@ -1,0 +1,40 @@
+﻿@using App.Entities.Concrete
+@model List<User>
+
+<div class="col-lg-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Kullanıcılar</h4>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Kullanıcı Adı</th>
+                            <th>Mail Adresi</th>
+                            <th>Şehir</th>
+                            <th>Durum</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Email</td>
+                                <td>
+                                   @item.City
+                                </td>
+                                <td>
+                                    <label class="badge badge-success">Aktif</label>
+                                </td>
+                            </tr>
+                            }
+                            
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

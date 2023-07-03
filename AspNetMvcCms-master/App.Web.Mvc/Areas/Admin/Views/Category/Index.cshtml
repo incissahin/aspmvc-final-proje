@@ -1,0 +1,51 @@
+﻿@using App.Entities.Concrete
+@model List<Category>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-lg-12 grid-margin stretch-card">
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title"> Kategori Kontrol Paneli </h4>
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th> <b>İşlemler</b></th>
+							<th> <b>#</b></th>
+							<th> <b> Adı </b> </th>
+							<th> <b> Açıklama </b></th>
+							<th> <b> Eklenme Tarihi </b></th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model)
+						{
+							<tr>
+								<td>
+									<a asp-controller="Category" asp-action="DeleteCategory" asp-route-id="@item.Id" class="btn btn-inverse-danger">Sil</a>
+									<a asp-controller="Category" asp-action="EditCategory" asp-route-id="@item.Id" class="btn btn-inverse-success">Düzenle</a>
+								</td>
+								<td>
+									@item.Id
+								</td>
+								<td>
+									@item.Name
+								</td>
+								<td>
+									@item.Description
+								</td>
+								<td>
+									@item.CreatedAt.Year
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+				<a asp-controller="Category" asp-action="AddCategory" class="btn btn-inverse-info"> Yeni Kategori Ekle </a>
+			</div>
+		</div>
+	</div>
+</div>

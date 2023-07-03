@@ -1,0 +1,34 @@
+﻿@model App.Entities.Concrete.Post
+@{
+    ViewData["Title"] = "DetailsBlog";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12 grid-margin stretch-card">
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">Default form</h4>
+			<p class="card-description">İçerik Detay Paneli</p>
+			<form class="forms-sample" asp-action="DetailsBlog" method="post">
+				<div class="form-group">
+					<label for="exampleInputUsername1">#</label>
+					<input type="text" class="form-control" asp-for="UserId" placeholder="Kullanıcı No" readonly />
+				</div>
+				<div class="form-group">
+					<label for="exampleInputUsername1">Başlık</label>
+					<input type="text" class="form-control" asp-for="Title" placeholder="Kategori Adı" readonly />
+				</div>
+				<div class="form-group">
+					<label for="Acıklama">İçerik</label>
+					<textarea class="form-control" asp-for="Content" placeholder="Mail Adresi" readonly></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for="Acıklama">Kayıt Tarihi</label>
+					<input type="text" class="form-control" asp-for="CreatedAt" placeholder="Kayıt Tarihi" readonly />
+				</div>
+				<input type="hidden" asp-for="Id" />
+			</form>
+		</div>
+	</div>
+</div>

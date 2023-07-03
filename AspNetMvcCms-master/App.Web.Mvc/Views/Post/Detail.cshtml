@@ -1,0 +1,123 @@
+﻿@using App.Entities.Concrete;
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Mvc.Routing;
+@using System.Security.Claims;
+
+@inject IUrlHelperFactory UrlHelperFactory
+@model Post;
+
+@{
+	var isAuthenticated = Context.User.Identity.IsAuthenticated;
+	var urlHelper = UrlHelperFactory.GetUrlHelper(ViewContext);
+	var currentUrl = urlHelper.ActionContext.HttpContext.Request.Path;
+}
+<section class="page-title bg-1">
+	<div class="overlay"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="block text-center">
+					<span class="text-white">Post Detayları</span>
+					<h1 class="text-capitalize mb-5 text-lg">Blog Post</h1>
+
+					<!-- <ul class="list-inline breadcumb-nav">
+					  <li class="list-inline-item"><a href="index.html" class="text-white">Home</a></li>
+					  <li class="list-inline-item"><span class="text-white">/</span></li>
+					  <li class="list-inline-item"><a href="#" class="text-white-50">News details</a></li>
+					</ul> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="section blog-wrap">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="row">
+					<div class="col-lg-12 mb-5">
+						<div class="single-blog-item">
+							<img src="/postimages/@Model.PostImage.ImagePath" alt="" class="img-fluid">
+
+							<div class="blog-item-content mt-5">
+								<div class="blog-item-meta mb-3">
+									<span class="text-color-2 text-capitalize mr-3"><i class="icofont-book-mark mr-2"></i> @Model.CategoryPosts.First().Category.Name</span>
+									<span class="text-muted text-capitalize mr-3"><i class="icofont-comment mr-2"></i>@Model.PostComments.Count</span>
+									<span class="text-black text-capitalize mr-3"><i class="icofont-calendar mr-2"></i> @Model.CreatedAt</span>
+								</div>
+
+								<h2 class="mb-4 text-md"><a href="blog-single.html">@Model.Title</a></h2>
+
+								<p>
+									@Model.Content
+								</p>
+
+								<div class="mt-5 clearfix">
+									<ul class="float-right list-inline">
+										<li class="list-inline-item"> Share: </li>
+										<li class="list-inline-item"><a href="#!"><i class="icofont-facebook"></i></a></li>
+										<li class="list-inline-item"><a href="#!"><i class="icofont-twitter"></i></a></li>
+										<li class="list-inline-item"><a href="#!"><i class="icofont-pinterest"></i></a></li>
+										<li class="list-inline-item"><a href="#!"><i class="icofont-linkedin"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					
+
+					
+					@if (!isAuthenticated)
+					{
+						<h4>Yorum yapabilmek veya yorumları görüntüleyebilmek için <a class="text-danger" asp-action="Login" asp-controller="Auth" asp-route-redirectUrl="@currentUrl">giriş</a> yapın!</h4>
+					}
+					else
+					{
+						<div class="col-lg-12">
+							<div class="comment-area mt-4 mb-5">
+								<h4 class="mb-4">Bu konuda @Model.PostComments.Count yorum var</h4>
+								<ul class="comment-tree list-unstyled">
+									@foreach (var comments in Model.PostComments)
+									{
+										if (comments.IsActive)
+										{
+											<li class="mb-5">
+												<div class="comment-area-box d-block d-sm-flex">
+													<div class="comment-thumb">
+														<img alt="" src="/template/images/blog/testimonial1.jpg" style="width: 70px">
+													</div>
+
+													<div class="block">
+														<div class="comment-info">
+															<h5 class="mb-1">@comments.User.Name</h5>
+															<span>@comments.User.City</span>
+															<span class="date-comm">| Posted @comments.CreatedAt</span>
+														</div>
+
+														<div class="comment-content mt-3">
+															<p>
+																@comments.Comment
+															</p>
+														</div>
+													</div>
+												</div>
+											</li>
+										}
+
+									}
+
+								</ul>
+							</div>
+						</div>
+						
+						@await Component.InvokeAsync("PostAComment", new {postId = Model.Id, userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value)});
+					}
+
+				</div>
+			</div>
+			@await Component.InvokeAsync("BlogSidebar")
+		</div>
+	</div>
+</section>

@@ -1,0 +1,48 @@
+﻿@using App.Entities.Concrete
+@model List<Category>
+@{
+	string color = "";
+}
+
+<div class="col-sm-6 col-xl-6 stretch-card grid-margin">
+	<div class="card">
+		<div class="card-body">
+			@foreach (var item in Model)
+			{
+				if (item.Name == "Sağlık")
+				{
+					color = "hex-mid hexagon-danger";
+				}
+				if (item.Name == "Ekipmanlar")
+				{
+					color = "hex-mid hexagon-warning";
+				}
+				if (item.Name == "Kalp")
+				{
+					color = "hex-mid hexagon-info";
+				}
+				if (item.Name == "Ücretsiz Danışmanlık")
+				{
+					color = "hex-mid hexagon-success";
+				}
+				if (item.Name == "Laboratuvar Testleri")
+				{
+					color = "hex-mid hexagon-primary";
+				}
+				<div class="d-flex border-bottom mb-4 pb-2">
+					<div class="hexagon">
+						<div class="@color">
+							<i class="mdi mdi-heart-outline"></i>
+						</div>
+					</div>
+					<div class="ps-4">
+						<h4 class="@color"> @item.Name </h4>
+						<h6 class="text-muted">@item.Description</h6>
+					</div>
+				</div>
+			}
+			
+			
+		</div>
+	</div>
+</div>

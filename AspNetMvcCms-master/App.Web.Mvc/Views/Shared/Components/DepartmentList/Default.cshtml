@@ -1,0 +1,12 @@
+﻿@using App.Entities.Concrete;
+@model IEnumerable<Department>;
+
+<a class="nav-link dropdown-toggle" href="department.html" id="dropdown02" data-toggle="dropdown"
+   aria-haspopup="true" aria-expanded="false">Bölümler <i class="icofont-thin-down"></i></a>
+<ul class="dropdown-menu" aria-labelledby="dropdown02">
+    <li><a class="dropdown-item" asp-action="Index" asp-controller="Department">Tüm Bölümler</a></li>
+    @foreach(var item in Model)
+    {
+        <li><a class="dropdown-item" asp-action="Detail" asp-controller="Department" asp-route-id="@item.Id">@item.Title</a></li>
+    }
+</ul>
